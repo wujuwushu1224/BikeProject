@@ -33,58 +33,58 @@ export default {
   },
   data() {
     return {
-      // DataLists: [
-      //   {
-      //     imgURL:'static/img01.jpg',
-      //     title:'世界城市日，骑行点亮城市',
-      //     time:'2017/10/31'
-      //   },
-      //   {
-      //     imgURL:'static/img02.jpg',
-      //     title:'顺风车，五折拼一下!',
-      //     time:'2017/10/30'
-      //   },
-      //   {
-      //     imgURL:'static/img01.jpg',
-      //     title:'世界城市日，骑行点亮城市',
-      //     time:'2017/10/31'
-      //   },
-      //   {
-      //     imgURL:'static/img02.jpg',
-      //     title:'顺风车，五折拼一下!',
-      //     time:'2017/10/30'
-      //   },
-      //   {
-      //     imgURL:'static/img01.jpg',
-      //     title:'世界城市日，骑行点亮城市',
-      //     time:'2017/10/31'
-      //   },
-      //   {
-      //     imgURL:'static/img02.jpg',
-      //     title:'顺风车，五折拼一下!',
-      //     time:'2017/10/30'
-      //   },
-      //    {
-      //     imgURL:'static/img01.jpg',
-      //     title:'世界城市日，骑行点亮城市',
-      //     time:'2017/10/31'
-      //   },
-      //   {
-      //     imgURL:'static/img02.jpg',
-      //     title:'顺风车，五折拼一下!',
-      //     time:'2017/10/30'
-      //   },
-      //    {
-      //     imgURL:'static/img01.jpg',
-      //     title:'世界城市日，骑行点亮城市',
-      //     time:'2017/10/31'
-      //   },
-      //   {
-      //     imgURL:'static/img02.jpg',
-      //     title:'顺风车，五折拼一下!',
-      //     time:'2017/10/30'
-      //   }
-      // ],
+      DataLists: [
+        {
+          imgURL:'static/img01.jpg',
+          title:'世界城市日，骑行点亮城市',
+          time:'2017/10/31'
+        },
+        {
+          imgURL:'static/img02.jpg',
+          title:'顺风车，五折拼一下!',
+          time:'2017/10/30'
+        },
+        {
+          imgURL:'static/img01.jpg',
+          title:'世界城市日，骑行点亮城市',
+          time:'2017/10/31'
+        },
+        {
+          imgURL:'static/img02.jpg',
+          title:'顺风车，五折拼一下!',
+          time:'2017/10/30'
+        },
+        {
+          imgURL:'static/img01.jpg',
+          title:'世界城市日，骑行点亮城市',
+          time:'2017/10/31'
+        },
+        {
+          imgURL:'static/img02.jpg',
+          title:'顺风车，五折拼一下!',
+          time:'2017/10/30'
+        },
+         {
+          imgURL:'static/img01.jpg',
+          title:'世界城市日，骑行点亮城市',
+          time:'2017/10/31'
+        },
+        {
+          imgURL:'static/img02.jpg',
+          title:'顺风车，五折拼一下!',
+          time:'2017/10/30'
+        },
+         {
+          imgURL:'static/img01.jpg',
+          title:'世界城市日，骑行点亮城市',
+          time:'2017/10/31'
+        },
+        {
+          imgURL:'static/img02.jpg',
+          title:'顺风车，五折拼一下!',
+          time:'2017/10/30'
+        }
+      ],
       MessageLists: [
         {
           imgURL:'static/img02.jpg',
