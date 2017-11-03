@@ -86,7 +86,7 @@ export default {
           'zh-CN': '中文',
           'en': 'English'
         },
-        drawerVisibility: true,
+        drawerVisibility: false,
         showMode: 'push',
         showModeValue: 'push',
         showPlacement: 'left',

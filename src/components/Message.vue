@@ -2,6 +2,9 @@
     <div>
         <XHeader>
             <span class= "messageTitle">我的消息</span>
+              <router-link :to="{ name:'Index' }" slot="overwrite-left">
+                  返回
+              </router-link> 
         </XHeader>
          <scroller 
           :on-refresh="refresh"
