@@ -1,35 +1,32 @@
 <template>
-  <div>
+  <div style="height:100%;">
+    <!-- 右边按钮功能 -->
     <div v-transfer-dom>
       <loading ></loading>
     </div>
     <div v-transfer-dom>
       <actionsheet :menus="menus" v-model="showMenu" @on-click-menu="changeLocale"></actionsheet>
     </div>
+
       <drawer
         width="200px;"
       :show.sync="drawerVisibility"
       :show-mode="showModeValue"
       :placement="showPlacementValue"
-      :drawer-style="{'background-color':'#35495e', width: '200px'}"
+      :drawer-style="{'background-color':'#eee', width: '200px'}"
       >  
 
       <!-- drawer content -->
         <div slot="drawer">
-        <group title="Drawer demo(beta)" style="margin-top:20px;">
-          <cell title="Demo" link="/demo" value="演示" @click.native="drawerVisibility = false">
-          </cell>
-          <cell title="Buy me a coffee" link="project/donate" @click.native="drawerVisibility = false">
-          </cell>
-          <cell title="Github" link="http://github.com/airyland/vux" value="Star me" @click.native="drawerVisibility = false">
-          </cell>
-        </group>
-        <group title="showMode">
-          <radio v-model="showMode" :options="['push', 'overlay']" @on-change="onShowModeChange"></radio>
-        </group>
-        <group title="placement">
-          <radio v-model="showPlacement" :options="['left', 'right']" @on-change="onPlacementChange"></radio>
-        </group>
+          <group title="个人中心" style="margin-top:20px;font-size:20px;" >
+            <cell title="我的钱包" link="/MyMoney" value="0.0元" @click.native="drawerVisibility = false">
+            </cell>
+            <cell title="我的卡券" link="/MyCard" @click.native="drawerVisibility = false">
+            </cell>
+            <cell title="我的行程" link="/MyDistance" value="32.2公里" @click.native="drawerVisibility = false">
+            </cell>
+          </group>
+        
       </div>
 
       <!-- main content -->
@@ -37,17 +34,22 @@
         <x-header
           title="bike"
           :left-options="leftOptions"
-          :right-options="rightOptions"
           :transition="headerTransition"
           @on-click-more="onClickMore"
           style="width:100%;position:absolute;left:0;top:0;z-index:100;"
         >
-          <span slot="overwrite-left">
+          <span slot="overwrite-left" @click="drawerVisibility = !drawerVisibility">
             <x-icon type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
           </span>
-           
+          <router-link :to="{name:'Message'}" slot="right" >我的消息</router-link>
         </x-header>
-
+        <transition
+        @after-enter="$vux.bus && $vux.bus.$emit('vux:after-view-enter')" 
+        >
+          <router-view class="router-view"></router-view>
+        </transition>
+          <tabbar class="vux-demo-tabbar" icon-class="vux-center" v-show="!isTabbarDemo" slot="bottom">
+          </tabbar>
       </view-box>
         
       </drawer>
@@ -84,7 +86,7 @@ export default {
           'zh-CN': '中文',
           'en': 'English'
         },
-        drawerVisibility: false,
+        drawerVisibility: true,
         showMode: 'push',
         showModeValue: 'push',
         showPlacement: 'left',
@@ -117,9 +119,9 @@ export default {
   },
   computed: {
     rightOptions () {
-      return {
-        showMore: true
-      }
+      // return {
+      //   showMore: true
+      // }
     },
     leftOptions () {
       return {
@@ -128,6 +130,9 @@ export default {
     },
     headerTransition () {
       return this.direction === 'forward' ? 'vux-header-fade-in-right' : 'vux-header-fade-in-left'
+    },
+    isTabbarDemo () {
+      return /tabbar/.test("")
     },
   }
 }
