@@ -15,8 +15,7 @@ Vue.config.productionTip = false
 AMap.initAMapApiLoader({
   // 申请的高德key
   key: '966b5d600adf5f4b95f23dd8cda143b8',
-  // 地图样式
-  mapStyle: 'amap://styles/13a609e12b67f1e17b89e94a097dc5cc',
+ 
   // 插件集合
   plugin: ['Geolocation','Autocomplete', 'PlaceSearch', 'Scale', 'OverView', 'ToolBar', 'MapType', 'PolyEditor', 'AMap.CircleEditor']
 });

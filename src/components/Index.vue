@@ -47,7 +47,7 @@
         </x-header>
 
       <!-- map -->
-      <el-amap vid="amap"  :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom">
+      <el-amap vid="amap"  :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom" map-style="amap://styles/13a609e12b67f1e17b89e94a097dc5cc">
         <el-amap-marker v-for="marker in markers" :position="marker.position" ></el-amap-marker>
       </el-amap>
       
@@ -81,12 +81,13 @@ export default {
     Actionsheet
   },
   created() {
-    
+
   },
   data() {
     let self = this;
     return {
       center: [121.59996, 31.197646],
+     
       lng: 0,
       lat: 0,
       loaded: false,
