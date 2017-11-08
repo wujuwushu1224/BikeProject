@@ -8,28 +8,28 @@
       <actionsheet :menus="menus" v-model="showMenu" @on-click-menu="changeLocale"></actionsheet>
     </div>
 
-      <drawer
-        width="200px;"
-      :show.sync="drawerVisibility"
-      :show-mode="showModeValue"
-      :placement="showPlacementValue"
-      :drawer-style="{'background-color':'#eee', width: '200px'}"
-      >  
+    <drawer
+      width="200px;"
+    :show.sync="drawerVisibility"
+    :show-mode="showModeValue"
+    :placement="showPlacementValue"
+    :drawer-style="{'background-color':'#eee', width: '200px'}"
+    >  
 
-      <!-- drawer content -->
-        <div slot="drawer">
-          <group title="个人中心" style="margin-top:20px;font-size:20px;" >
-            <cell title="我的钱包" link="/MyMoney" value="0.0元" @click.native="drawerVisibility = false">
-            </cell>
-            <cell title="我的卡券" link="/MyCard" @click.native="drawerVisibility = false">
-            </cell>
-            <cell title="我的行程" link="/MyDistance" value="32.2公里" @click.native="drawerVisibility = false">
-            </cell>
-          </group>
-        
-      </div>
+    <!-- drawer content -->
+      <div slot="drawer">
+        <group title="个人中心" style="margin-top:20px;font-size:20px;" >
+          <cell title="我的钱包" link="/MyMoney" value="0.0元" @click.native="drawerVisibility = false">
+          </cell>
+          <cell title="我的卡券" link="/MyCard" @click.native="drawerVisibility = false">
+          </cell>
+          <cell title="我的行程" link="/MyDistance" value="32.2公里" @click.native="drawerVisibility = false">
+          </cell>
+        </group>
+      
+    </div>
 
-      <!-- main content -->
+    <!-- main content -->
       <view-box ref="viewBox" body-padding-top="46px" body-padding-bottom="55px">
         <x-header
           title="bike"
@@ -41,23 +41,25 @@
           <span slot="overwrite-left" @click="drawerVisibility = !drawerVisibility">
             <x-icon type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
           </span>
-          <router-link :to="{name:'Message'}" slot="right" >我的消息</router-link>
+            <router-link :to="{name:'Message'}" slot="right" >
+                我的消息
+            </router-link>
         </x-header>
-        <transition
-        @after-enter="$vux.bus && $vux.bus.$emit('vux:after-view-enter')" 
-        >
-          <router-view class="router-view"></router-view>
-        </transition>
-          <tabbar class="vux-demo-tabbar" icon-class="vux-center" v-show="!isTabbarDemo" slot="bottom">
-          </tabbar>
+
+      <!-- map -->
+      <el-amap vid="amap"  :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom">
+        <el-amap-marker v-for="marker in markers" :position="marker.position" ></el-amap-marker>
+      </el-amap>
+      
       </view-box>
-        
-      </drawer>
+    </drawer>
   </div>
 </template>
 <script>
 import { Radio, Group, Cell, Badge, Drawer, Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'vux'
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
+
 export default {
   directives: {
     TransferDom
@@ -78,19 +80,50 @@ export default {
     Loading,
     Actionsheet
   },
+  created() {
+    
+  },
   data() {
+    let self = this;
     return {
-       showMenu: false,
-        menus: {
-          'language.noop': '<span class="menu-title">Language</span>',
-          'zh-CN': '中文',
-          'en': 'English'
-        },
-        drawerVisibility: false,
-        showMode: 'push',
-        showModeValue: 'push',
-        showPlacement: 'left',
-        showPlacementValue: 'left'
+      center: [121.59996, 31.197646],
+      lng: 0,
+      lat: 0,
+      loaded: false,
+      markers: [],
+      zoom: 18,
+      plugin: [
+        {
+          pName: 'Geolocation',
+          events: {
+            init(o) {
+            // o 是高德地图定位插件实例
+              o.getCurrentPosition((status, result) => {
+                console.log(result)
+                if (result && result.position) {
+                  self.lng = result.position.lng;
+                  self.lat = result.position.lat;
+                  self.center = [self.lng, self.lat];
+                  self.loaded = true;
+                  self.$nextTick();
+                }
+              });
+            }
+          }
+        }
+      ],
+      showMenu: false,
+      menus: {
+        'language.noop': '<span class="menu-title">Language</span>',
+        'zh-CN': '中文',
+        'en': 'English'
+      },
+      drawerVisibility: false,
+      showMode: 'push',
+      showModeValue: 'push',
+      showPlacement: 'left',
+      showPlacementValue: 'left'
+      
     }
   },
   methods: {
@@ -134,6 +167,22 @@ export default {
     isTabbarDemo () {
       return /tabbar/.test("")
     },
+  },
+   mounted() {
+    // 姑且N为2
+    // 这样地图上就添加了两个人
+    this.markers = [
+     {
+      position: [131.240007,31.015149]
+      // icon: "static/img01.jpg"
+     }, 
+     {
+      position: [121.240007,31.015149]
+     },
+     {
+      position: [121.243117,31.015149]
+     }
+    ];
   }
 }
 </script>
