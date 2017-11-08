@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:100%; backgroundColor:#000" >
     <!-- 右边按钮功能 -->
     <div v-transfer-dom>
       <loading ></loading>
@@ -18,7 +18,8 @@
 
     <!-- drawer content -->
       <div slot="drawer">
-        <group title="个人中心" style="margin-top:20px;font-size:20px;" >
+        <group title="个人中心" style="margin-top:20px;font-size:40px;" >
+          <img src="static/bike.jpg" style="margin-left:30px"> 
           <cell title="我的钱包" link="/MyMoney" value="0.0元" @click.native="drawerVisibility = false">
           </cell>
           <cell title="我的卡券" link="/MyCard" @click.native="drawerVisibility = false">
@@ -26,7 +27,6 @@
           <cell title="我的行程" link="/MyDistance" value="32.2公里" @click.native="drawerVisibility = false">
           </cell>
         </group>
-      
     </div>
 
     <!-- main content -->
@@ -47,10 +47,16 @@
         </x-header>
 
       <!-- map -->
-      <el-amap vid="amap"  :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom" map-style="amap://styles/13a609e12b67f1e17b89e94a097dc5cc">
+      <el-amap   vid="amap"  :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom" map-style="amap://styles/13a609e12b67f1e17b89e94a097dc5cc">
         <el-amap-marker v-for="marker in markers" :position="marker.position" ></el-amap-marker>
+         <div >
+        <a class="camera">
+          扫码
+        </a>
+         <input id="takepicture" type="file" accept="image/*" capture="camera" style="opacity:0;width:100%" >
+      </div>
       </el-amap>
-      
+     
       </view-box>
     </drawer>
   </div>
@@ -87,7 +93,6 @@ export default {
     let self = this;
     return {
       center: [121.59996, 31.197646],
-     
       lng: 0,
       lat: 0,
       loaded: false,
@@ -100,13 +105,19 @@ export default {
             init(o) {
             // o 是高德地图定位插件实例
               o.getCurrentPosition((status, result) => {
-                console.log(result)
+                // console.log(result)
                 if (result && result.position) {
                   self.lng = result.position.lng;
                   self.lat = result.position.lat;
+                  for(var i=1; i<=5; i++) {
+                    var r = (Math.random()*100 - 50)/100;
+                    console.log( r )
+                    self.markers.push( {position: [self.lng + 0.001*r ,self.lat - 0.01*r ]} )
+                  }
                   self.center = [self.lng, self.lat];
                   self.loaded = true;
                   self.$nextTick();
+                  
                 }
               });
             }
@@ -115,9 +126,7 @@ export default {
       ],
       showMenu: false,
       menus: {
-        'language.noop': '<span class="menu-title">Language</span>',
-        'zh-CN': '中文',
-        'en': 'English'
+        
       },
       drawerVisibility: false,
       showMode: 'push',
@@ -170,20 +179,7 @@ export default {
     },
   },
    mounted() {
-    // 姑且N为2
-    // 这样地图上就添加了两个人
-    this.markers = [
-     {
-      position: [131.240007,31.015149]
-      // icon: "static/img01.jpg"
-     }, 
-     {
-      position: [121.240007,31.015149]
-     },
-     {
-      position: [121.243117,31.015149]
-     }
-    ];
+
   }
 }
 </script>
@@ -288,5 +284,12 @@ html, body {
 }
 .menu-title {
   color: #888;
+}
+.camera {
+  position: absolute;
+  width: 100%;
+  background-color:#000;
+  color:#fff;
+  text-align: center;
 }
 </style>
