@@ -111,7 +111,7 @@ export default {
                   self.lat = result.position.lat;
                   for(var i=1; i<=5; i++) {
                     var r = (Math.random()*100 - 50)/100;
-                    console.log( r )
+                    // console.log( r )
                     self.markers.push( {position: [self.lng + 0.001*r ,self.lat - 0.01*r ]} )
                   }
                   self.center = [self.lng, self.lat];

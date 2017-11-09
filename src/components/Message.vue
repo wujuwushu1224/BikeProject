@@ -36,89 +36,20 @@ export default {
   },
   data() {
     return {
-      DataLists: [
-        {
-          imgURL:'static/img01.jpg',
-          title:'世界城市日，骑行点亮城市',
-          time:'2017/10/31'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img01.jpg',
-          title:'世界城市日，骑行点亮城市',
-          time:'2017/10/31'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img01.jpg',
-          title:'世界城市日，骑行点亮城市',
-          time:'2017/10/31'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-         {
-          imgURL:'static/img01.jpg',
-          title:'世界城市日，骑行点亮城市',
-          time:'2017/10/31'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-         {
-          imgURL:'static/img01.jpg',
-          title:'世界城市日，骑行点亮城市',
-          time:'2017/10/31'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        }
-      ],
-      MessageLists: [
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        },
-        {
-          imgURL:'static/img02.jpg',
-          title:'顺风车，五折拼一下!',
-          time:'2017/10/30'
-        }
-      ]
+
     }
   },
+  created() {
+      this.$store.dispatch('getDataList');
+  },
   computed: {
-   
+    MessageLists() {
+      return this.$store.getters.MessageLists;
+    },
+    DataLists() {
+      
+      return this.$store.getters.DataLists;
+    }
   },
   methods: {
     refresh (done) {
@@ -133,14 +64,17 @@ export default {
     },
     infinite (done) {
       var that = this;
+      // console.log(this.$store.state.DataLists)
       setTimeout(function() {
-        for (var i = 0; i < that.DataLists.length ; i++) {
-          console.log(that.DataLists[i])
-          that.MessageLists.push( that.DataLists[i] )
-        }
+        // for (var i = 0; i <  ; i++) {
+         
+        // }
         done();
       },1500)
     }
+  },
+  mounted() {
+    
   }
 }
 </script>
