@@ -5,18 +5,19 @@ Vue.use(Vuex,axios);
 
 export default new Vuex.Store({
     state: {
-        DataLists: [],
-        MessageLists: []
+        DataLists: []
     },
     getters: {
         DataLists(state) {
             return state.DataLists;
-        },
-        MessageLists(state) {
-            return state.DataLists.filter( item=> {
-                
-            });
         }
+        // MessageLists(state) {
+        //     var b = 0
+        //     return state.DataLists.filter( a=> {
+        //         b++;
+        //         return  b <= state.end;
+        //     });
+        // }
     },
     mutations: {
         updatedataList(state, data) {
@@ -28,7 +29,7 @@ export default new Vuex.Store({
            return axios({
                 url:'http://localhost:8080/static/data.json'
            }).then(response=>{
-                console.log(response.data.DataLists.length)
+                // console.log(response.data.DataLists.length)
                 store.commit('updatedataList',response.data.DataLists);
            });
         }

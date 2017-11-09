@@ -36,7 +36,9 @@ export default {
   },
   data() {
     return {
-
+      pageSize: 5,
+      currentPage: 1,
+      onff:0,
     }
   },
   created() {
@@ -44,37 +46,45 @@ export default {
   },
   computed: {
     MessageLists() {
-      return this.$store.getters.MessageLists;
+      let start = (this.currentPage - 1) * this.pageSize;
+      let end = start + this.pageSize;
+      return this.$store.getters.DataLists.filter( (item,index) => {
+        return index >=start && index < end;
+      } );
     },
     DataLists() {
-      
       return this.$store.getters.DataLists;
     }
   },
   methods: {
     refresh (done) {
-
+     
       //这里模拟请求数据
       setTimeout(function () {
-        for (var i = 0; i <5 ; i++) {
+        // for (var i = start; i < pages ; i++) {
           
-        }
+        // }
         done();
       },1500)
     },
     infinite (done) {
-      var that = this;
+        var that = this;
       // console.log(this.$store.state.DataLists)
-      setTimeout(function() {
-        // for (var i = 0; i <  ; i++) {
-         
-        // }
-        done();
-      },1500)
-    }
+        setTimeout(function() {
+          that.onff++;
+          console.log(that.onff)
+          if(that.onff>1) {
+            that.pageSize+=5;
+            done(true);
+          } else {
+            done();
+          }
+          
+        },1500)
+      }
   },
   mounted() {
-    
+    // console.log(this.$store.getters.MessageLists)
   }
 }
 </script>
