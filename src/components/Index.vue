@@ -20,7 +20,7 @@
       <div slot="drawer">
         <group title="个人中心" style="margin-top:20px;font-size:40px;" >
           <img src="static/bike.jpg" style="margin-left:30px"> 
-          <cell title="我的钱包" link="/MyMoney" value="0.0元" @click.native="drawerVisibility = false">
+          <cell title="我的钱包" link="/mymoney" value="0.0元" @click.native="drawerVisibility = false">
           </cell>
           <cell title="我的卡券" link="/MyCard" @click.native="drawerVisibility = false">
           </cell>
@@ -64,7 +64,6 @@
 <script>
 import { Radio, Group, Cell, Badge, Drawer, Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'vux'
 import { mapState, mapActions } from 'vuex'
-import axios from 'axios'
 
 export default {
   directives: {

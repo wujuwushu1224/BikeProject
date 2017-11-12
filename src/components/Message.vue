@@ -61,9 +61,9 @@ export default {
      
       //这里模拟请求数据
       setTimeout(function () {
-        // for (var i = start; i < pages ; i++) {
+        for (var i = start; i < pages ; i++) {
           
-        // }
+        }
         done();
       },1500)
     },

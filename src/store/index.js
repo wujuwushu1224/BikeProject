@@ -11,13 +11,6 @@ export default new Vuex.Store({
         DataLists(state) {
             return state.DataLists;
         }
-        // MessageLists(state) {
-        //     var b = 0
-        //     return state.DataLists.filter( a=> {
-        //         b++;
-        //         return  b <= state.end;
-        //     });
-        // }
     },
     mutations: {
         updatedataList(state, data) {
@@ -27,7 +20,7 @@ export default new Vuex.Store({
     actions:{
        getDataList(store) {
            return axios({
-                url:'http://localhost:8080/static/data.json'
+                url:'https://www.easy-mock.com/mock/5a055972e264ca23e8c71689/example/dataLists'
            }).then(response=>{
                 // console.log(response.data.DataLists.length)
                 store.commit('updatedataList',response.data.DataLists);
